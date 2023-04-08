@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Client Web App</title>
+    <style>
+        /* Add any CSS styling here */
+    </style>
+</head>
+<body>
+    <h1>何撇撇</h1>
+    <div id="messages"></div>
+    <script>
+const SERVER_IP = '192.168.31.207'; // Replace with your external IP address
+const SERVER_PORT = 1254;
+
+const messagesDiv = document.getElementById('messages');
+
+// Create WebSocket connection
+const socket = new WebSocket(`ws://${SERVER_IP}:${SERVER_PORT}`);
+
+// Connection opened
+socket.addEventListener('open', (event) => {
+    messagesDiv.innerHTML += 'Connected to the server<br>';
+});
+
+// Listen for messages
+socket.addEventListener('message', (event) => {
+    messagesDiv.innerHTML += `Server: ${event.data}<br>`;
+});
+
+// Connection closed
+socket.addEventListener('close', (event) => {
+    messagesDiv.innerHTML += 'Disconnected from the server<br>';
+});
+
+
+
+    </script>
+</body>
+</html>
